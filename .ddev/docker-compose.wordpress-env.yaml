@@ -1,0 +1,10 @@
+version: '3.6'
+
+services:
+  web:
+    environment:
+      - WP_DDEV_LOCALE=de_DE
+      - WP_DDEV_VERSION=latest
+      - WP_DDEV_TITLE=WordPress-Distribution
+      - WP_DDEV_ADMIN_USER=admin-ddev
+      - WP_DDEV_ADMIN_EMAIL=admin-ddev@ddev.site
