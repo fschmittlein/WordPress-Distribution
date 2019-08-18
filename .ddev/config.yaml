@@ -50,4 +50,7 @@ hooks:
     - exec: "wp plugin install disable-xml-rpc --activate"
     - exec: "wp plugin install wp-rollback --activate"
     ## after installing all plugins, update the language
-    - exec: "wp language plugin install --all $WP_DDEV_LOCALE"  
+    - exec: "wp language plugin install --all $WP_DDEV_LOCALE"
+    ## install some wp-cli packages
+    #- exec: "wp package install trepmal/wp-revisions-cli"
+    
