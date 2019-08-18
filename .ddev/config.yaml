@@ -28,7 +28,7 @@ hooks:
     - exec: "wp config set WP_MAX_MEMORY_LIMIT 256M --add"
     - exec: "wp config set DISALLOW_FILE_EDIT true --raw"
     ## wordpress debug mode for developers
-    #- exec: "wp config set WP_DEBUG true --raw --add"
+    - exec: "wp config set WP_DEBUG true --raw --add"
     #- exec: "wp config set WP_DEBUG_LOG true --raw --add"
     #- exec: "wp config set WP_DEBUG_DISPLAY false --raw --add"
     #- exec: "wp config set SCRIPT_DEBUG true --raw --add"
@@ -46,8 +46,8 @@ hooks:
     ## install and activate some plugins
     - exec: "wp plugin install antispam-bee --activate"
     - exec: "wp plugin install statify --activate"
+    - exec: "wp plugin install rest-api-toolbox --activate"
+    - exec: "wp plugin install disable-xml-rpc --activate"
+    - exec: "wp plugin install wp-rollback --activate"
     ## after installing all plugins, update the language
-    - exec: "wp language plugin install --all $WP_DDEV_LOCALE"
-    ## install some wp-cli packages
-    #- exec: "wp package install alessandrotesoro/wp-usergen-cli"
-    
+    - exec: "wp language plugin install --all $WP_DDEV_LOCALE"  
