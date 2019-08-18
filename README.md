@@ -8,6 +8,6 @@
 1. Run `ddev start`
 1. Open `https://your-project.ddev.site/wp-admin` in your browser to log into the backend (Default: admin-ddev, Password: prompt for you)
 
-## Customisations (before `ddev start`)
+### Customisations (before `ddev start`)
 1. Change the language and the version for WordPress in the `docker-compose.wordpress-env.yaml` file (Default: de_DE and latest)
 1. Change the title for your WordPress
