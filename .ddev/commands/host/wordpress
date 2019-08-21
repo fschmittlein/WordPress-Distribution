@@ -1,0 +1,8 @@
+#!/bin/bash
+
+## Description: Creates a WordPress for you (including update wp cli)
+## Usage: wordpress
+## Example: ddev wordpress
+
+ddev exec "sudo wp cli update --stable --yes"
+ddev exec ".ddev/commands/web/wp-create"

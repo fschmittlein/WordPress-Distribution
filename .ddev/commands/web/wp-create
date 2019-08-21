@@ -1,0 +1,54 @@
+#!/bin/bash
+
+## Description: Creates a WordPress for you
+## Usage: wp-create
+## Example: ddev exec ".ddev/commands/web/wp-create"
+
+## download and install wordpress
+wp core download --locale=$WP_DDEV_LOCALE --version=$WP_DDEV_VERSION
+wp config create --dbname=db --dbuser=db --dbpass=db --dbhost=db
+wp core install --url=https://$VIRTUAL_HOST --title=$WP_DDEV_TITLE --admin_user=$WP_DDEV_ADMIN_USER --admin_email=$WP_DDEV_ADMIN_EMAIL
+
+## get new salts for your wp-config.php file
+wp config shuffle-salts
+
+## more ram and less more security
+wp config set WP_POST_REVISIONS false --raw --add
+wp config set WP_MEMORY_LIMIT 256M --add
+wp config set WP_MAX_MEMORY_LIMIT 256M --add
+wp config set DISALLOW_FILE_EDIT true --raw
+
+## wordpress debug mode for developers
+wp config set WP_DEBUG true --raw --add
+#wp config set WP_DEBUG_LOG true --raw --add
+#wp config set WP_DEBUG_DISPLAY false --raw --add
+#wp config set SCRIPT_DEBUG true --raw --add
+#wp config set SAVEQUERIES true --raw --add
+
+## empties a site of its content (posts, comments, terms, and meta)
+wp site empty --uploads --yes
+
+## delete all default plugins
+wp plugin delete --all
+
+## delete the default blogdescription
+wp option update blogdescription ''
+
+## hide for the search engines
+wp option update blog_public 0
+
+## disable the avatars
+wp option update show_avatars 0
+
+## install and activate some plugins
+wp plugin install antispam-bee --activate
+wp plugin install statify --activate
+wp plugin install rest-api-toolbox --activate
+wp plugin install disable-xml-rpc --activate
+wp plugin install wp-rollback --activate
+
+## after installing all plugins, update the language
+wp language plugin install --all $WP_DDEV_LOCALE
+
+## install some wp-cli packages
+#wp package install trepmal/wp-revisions-cli

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+## Description: Delete and create a new empty WordPress for you
+## Usage: wp-recreate
+## Example: ddev exec ".ddev/commands/web/wp-recreate"
+
+wp site empty --uploads --yes
+wp db reset --yes
+rm wp-config.php
+.ddev/commands/web/wp-create
