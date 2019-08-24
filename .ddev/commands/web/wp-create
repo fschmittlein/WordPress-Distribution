@@ -40,15 +40,20 @@ wp option update blog_public 0
 ## disable the avatars
 wp option update show_avatars 0
 
+## change permalinks
+wp option update permalink_structure '/%postname%'
+
 ## install and activate some plugins
 wp plugin install antispam-bee --activate
 wp plugin install statify --activate
 wp plugin install rest-api-toolbox --activate
 wp plugin install disable-xml-rpc --activate
 wp plugin install wp-rollback --activate
+wp plugin install litespeed-cache --activate
+wp plugin install block-lab --activate
 
 ## after installing all plugins, update the language
 wp language plugin install --all $WP_DDEV_LOCALE
 
 ## install some wp-cli packages
-#wp package install trepmal/wp-revisions-cli
+wp package install trepmal/wp-revisions-cli
