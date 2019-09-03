@@ -49,7 +49,7 @@ echo " "
 echo "Weather forecast"
 echo "────────────────"
 # Replace Nuremberg with your city name, GPS, etc. See: curl wttr.in/:help
-curl wttr.in/Nuremberg?1qF --silent --max-time 5
+curl "wttr.in/Nuremberg?lang=de&1AFQ" --silent --max-time 5
 
 
 #--------- SPACE ------------------------------------------------------------
