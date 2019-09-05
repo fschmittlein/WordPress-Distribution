@@ -10,4 +10,5 @@ nfs_mount_enabled: false
 provider: default
 use_dns_when_possible: true
 timezone: Europe/Berlin
-webimage_extra_packages: [rsstail,ccal,toilet]
+webimage_extra_packages: [rsstail, ccal, toilet, mc]
+dbimage_extra_packages: [mc]
