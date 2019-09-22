@@ -17,6 +17,8 @@ This distribution helps you to get a local new and fresh WordPress for everythin
 ### Customisations (before `ddev wordpress`)
 1. Change the language and the version for WordPress in the `docker-compose.wordpress-env.yaml` file (Default: de_DE and latest)
 1. Change the title for your WordPress
+1. Change the plugins for your WordPress
+1. Change the wp-cli packages for your WordPress
 
 ### ddev Custom Commands in the Distribution
 

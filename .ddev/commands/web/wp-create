@@ -44,26 +44,14 @@ else
 	wp option update show_avatars 0
 
 	## change permalinks
-	wp option update permalink_structure '/%postname%'
+	wp option update permalink_structure '/%postname%/'
 
 	## install and activate plugins
 	wp plugin install $WP_DDEV_PLUGINS --activate
-	#wp plugin install antispam-bee --activate
-	#wp plugin install statify --activate
-	#wp plugin install rest-api-toolbox --activate
-	#wp plugin install disable-xml-rpc --activate
-	#wp plugin install wp-rollback --activate
-	#wp plugin install block-lab --activate
-	#wp plugin install debug-bar --activate
-	#wp plugin install query-monitor --activate
-	#wp plugin install log-deprecated-notices --activate
-	#wp plugin install theme-check --activate
-	#wp plugin install developer --activate
 
 	## after installing all plugins, update the language
 	wp language plugin install --all $WP_DDEV_LOCALE
 
-	## install some wp-cli packages
-	#wp package install trepmal/wp-revisions-cli
+	## install wp-cli packages
 	wp package install $WP_DDEV_CLI_PACKAGES
 fi
