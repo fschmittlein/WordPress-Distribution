@@ -8,5 +8,5 @@ services:
       - WP_DDEV_TITLE=WordPress-Distribution
       - WP_DDEV_ADMIN_USER=admin-ddev
       - WP_DDEV_ADMIN_EMAIL=admin-ddev@ddev.site
-      - WP_DDEV_PLUGINS=antispam-bee statify rest-api-toolbox wp-rollback block-lab debug-bar query-monitor log-deprecated-notices theme-check developer
+      - WP_DDEV_PLUGINS=antispam-bee statify rest-api-toolbox wp-rollback block-lab debug-bar query-monitor log-deprecated-notices theme-check developer customizer-export-import
       - WP_DDEV_CLI_PACKAGES=trepmal/wp-revisions-cli
