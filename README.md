@@ -1,31 +1,29 @@
-## Installation steps for WordPress-Distribution
+# What this repository does?
+This repository helps you to get a local new and fresh WordPress for everything you want (e.g. Developing, Testing, etc.)
 
-### What this distribution does?
-This distribution helps you to get a local new and fresh WordPress for everything you want (e.g. Developing, Testing, etc.)
-
-### What this distribution need?
-1. Docker (see the System Requirements on ddev)
+## What this repository need?
+1. Docker Desktop (see the [System Requirements](https://ddev.readthedocs.io/en/stable/#system-requirements) on [ddev](https://ddev.readthedocs.io/en/stable/))
 1. [ddev](https://ddev.readthedocs.io/en/stable/#installation)
 
-### Install using ddev (recommended)
-1. Download and install ddev
-1. Clone the repository for a new project `git clone https://github.com/fschmittlein/WordPress-Distribution.git your-project`
+## Installation and usage
+1. Download and install [ddev](https://ddev.readthedocs.io/en/stable/#installation)
+1. Clone the repository for a new project `git clone https://github.com/fschmittlein/wp-ddev.git your-project`
 1. Run `cd your-project`
-1. Run `ddev wordpress` (only for the first start, after you can use `ddev start`)
-1. Open `https://your-project.ddev.site/wp-admin` in your browser to log into the backend (Default: admin-ddev, Password: prompt for you)
+1. Run `ddev start`
+1. Run `ddev wordpress` and wait
 
-### Customisations (before `ddev wordpress`)
-1. Change the language and the version for WordPress in the `docker-compose.wordpress-env.yaml` file (Default: de_DE and latest)
-1. Change the title for your WordPress
-1. Change the plugins for your WordPress
-1. Change the wp-cli packages for your WordPress
+## Customisations (before `ddev wordpress`)
+All adjustments must be made in the `docker-compose.wordpress-env.yaml`
+* Change the language and the version for WordPress
+* Change the title for your WordPress
+* Change the plugins for your WordPress
+* Change the wp-cli packages for your WordPress
 
-### ddev Custom Commands in the Distribution
+## ddev custom commands in the repository
 
-#### Host commands
-`ddev wordpress`: You need it only the first time, because its updates the wp cli inside the web container and after it installs your WordPress
+### web container commands
+`ddev wordpress`: Creates a complete WordPress including plugins and wp-cli packages
 
-#### Container commands
-`wp-create`: It will download the WordPress and some plugins. You can customize it for your need
+`ddev wp-block-builder`: A foundation for WordPress Gutenberg blocks plugin development that aims to provide clear and concise guide for building your first block plugin.
 
-`wp-recreate`: It will delete your WordPress and starts with a new and fresh WordPress
+`ddev wp-npm`: After wp-block-builder you can use the wp-npm command for the other npm commands.

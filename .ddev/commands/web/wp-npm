@@ -1,0 +1,14 @@
+#!/bin/bash
+
+## Description: After wp-block-builder you can use the wp-npm command for the other npm commands.
+## Usage: wp-npm [plugin-dir-name] [command]
+## Example: "ddev wp-npm karte-von-morgen run build" (https://www.npmjs.com/package/wp-block-builder)
+## ProjectTypes: wordpress
+
+if [ -f "/var/www/html/wp-config.php" ]; then
+    cd /var/www/html/wp-content/plugins/$1
+    npm $2 $3 $4 $5 $6 $7
+else
+    echo "WordPress is probably not installed. That's why I'd rather quit now."
+    exit 1
+fi

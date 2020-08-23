@@ -1,0 +1,14 @@
+#!/bin/bash
+
+## Description: A foundation for WordPress Gutenberg blocks plugin development that aims to provide clear and concise guide for building your first block plugin.
+## Usage: wp-block-builder
+## Example: "ddev wp-block-builder" (https://www.npmjs.com/package/wp-block-builder)
+## ProjectTypes: wordpress
+
+if [ -f "/var/www/html/wp-config.php" ]; then
+    cd /var/www/html/wp-content/plugins
+    npx wp-block-builder
+else
+    echo "WordPress is probably not installed. That's why I'd rather quit now."
+    exit 1
+fi

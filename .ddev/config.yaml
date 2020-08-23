@@ -1,14 +1,12 @@
-type: php
-php_version: "7.2"
+type: wordpress
+php_version: "7.4"
 webserver_type: apache-fpm
+timezone: Europe/Berlin
 router_http_port: "80"
 router_https_port: "443"
 xdebug_enabled: false
 additional_hostnames: []
 additional_fqdns: []
-nfs_mount_enabled: false
 provider: default
 use_dns_when_possible: true
-timezone: Europe/Berlin
-webimage_extra_packages: [rsstail, ccal, toilet, figlet, mc]
-dbimage_extra_packages: [mc]
+disable_settings_management: true

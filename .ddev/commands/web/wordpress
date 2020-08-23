@@ -1,0 +1,145 @@
+#!/bin/bash
+
+## Description: Creates a complete WordPress including plugins and wp-cli packages
+## Usage: wordpress [flags] [args]
+## Example: "ddev wordpress" or "ddev wordpress -cliu" or "ddev wordpress -d"
+## ProjectTypes: wordpress
+
+function show_help {
+    echo "Creates a complete WordPress including plugins and wp-cli packages"
+    echo ""
+    echo "Usage:"
+    echo "  wordpress [flags]"
+    echo ""
+    echo "Examples:"
+    echo "ddev wordpress"
+    echo "ddev wordpress -cliu -clip -wpd"
+    echo ""
+    echo "Flags:"
+    echo "  -cliu, --cli-update     Updates WP-CLI to the latest release"
+    echo "  -clip, --cli-packages   Installs a WP-CLI package"
+    echo "  -d, --delete            Delete the old WordPress (without additional demand)"
+    echo "  -no, --no-install       There is no installation of WordPress"
+    echo "  -wpd, --wp-debug        Additional debug variables are set during the installation"
+    echo " "
+}
+
+function wp_download_create_install {
+    if [ -f "/var/www/html/wp-config.php" ]; then
+        echo "WordPress is probably already installed. That's why I'd rather quit now."
+        exit 1
+    else
+        cd /var/www/html/
+
+        ## download and install wordpress
+        wp core download --locale=$WP_DDEV_LOCALE --version=$WP_DDEV_VERSION
+        wp config create --dbname=db --dbuser=db --dbpass=db --dbhost=db
+        if [ $? -ne 0 ]; then
+            echo "I guess there was a download error. That's why we're stopping here..."
+            exit 1
+        fi
+        wp core install --url=https://$DDEV_PRIMARY_URL --title="$WP_DDEV_TITLE" --admin_user="$WP_DDEV_ADMIN_USER" --admin_password="$WP_DDEV_ADMIN_PASSWORD" --admin_email=$WP_DDEV_ADMIN_EMAIL --skip-email
+
+        ## get new salts for your wp-config.php file
+        wp config shuffle-salts
+
+        ## more ram and less more security
+        wp config set WP_POST_REVISIONS false --raw
+        wp config set WP_MEMORY_LIMIT 256M
+        wp config set WP_MAX_MEMORY_LIMIT 512M
+        wp config set DISALLOW_FILE_EDIT true --raw
+
+        ## TODO
+        wp config set WP_LOCAL_DEV true --raw
+
+        ## empties a site of its content (posts, comments, terms, and meta)
+        wp site empty --uploads --yes
+
+        ## delete all default plugins
+        wp plugin delete --all
+
+        ## delete the default blogdescription
+        wp option update blogdescription ''
+
+        ## hide for the search engines
+        wp option update blog_public 0
+
+        ## disable the avatars
+        wp option update show_avatars 0
+
+        ## change permalinks
+        wp option update permalink_structure '/%postname%/'
+
+        ## Removes all widgets from the sidebar and places them in Inactive Widgets.
+        wp widget reset --all
+
+        ## install and activate plugins
+        wp plugin install $WP_DDEV_PLUGINS --activate
+
+        ## after installing all plugins, update the language
+        wp language plugin install --all $WP_DDEV_LOCALE
+
+        if $DO_WP_FLAGS_CLIP; then
+            ## install wp-cli packages
+            wp package install $WP_DDEV_CLI_PACKAGES
+        fi
+
+        if $DO_WP_FLAGS_WPD; then
+            ## wordpress debug mode for developers (https://wordpress.org/support/article/debugging-in-wordpress/)
+            wp config set WP_DEBUG true --raw
+            wp config set WP_DEBUG_LOG true --raw
+            wp config set WP_DEBUG_DISPLAY false --raw
+            wp config set SCRIPT_DEBUG true --raw
+            wp config set SAVEQUERIES true --raw
+        fi
+    fi
+}
+
+DO_WP_FLAGS_CLIP=false
+DO_WP_FLAGS_WPD=false
+DO_WP_INSTALL=true
+
+while :; do
+    case ${1:-} in
+         -h|-\?|--help)
+            show_help
+            exit
+             ;;
+         -cliu|--cli-update)
+            echo "Updates the WP-CLI..."
+            sudo wp cli update --stable --yes
+            echo " "
+             ;;
+         -clip|--cli-packages)
+            DO_WP_FLAGS_CLIP=true
+             ;;
+         -d|--delete)
+            echo "Delete the old WordPress..."
+            mysql -e 'DROP DATABASE IF EXISTS db; CREATE DATABASE db;'
+            rm -r /var/www/html/*
+            echo " "
+             ;;
+         -no|--no-install)
+            DO_WP_INSTALL=false
+             ;;
+         -wpd|--wp-debug)
+            DO_WP_FLAGS_WPD=true
+             ;;
+         --)              # End of all options.
+            shift
+            break
+             ;;
+         -?*)
+            printf 'WARN: Unknown option (ignored): %s\n' "$1" >&2
+             ;;
+         *)               # Default case: No more options, so break out of the loop.
+            break
+    esac
+
+    shift
+ done
+
+if $DO_WP_INSTALL; then
+    echo "Download, Create and Install a fresh new WordPress..."
+    wp_download_create_install
+fi

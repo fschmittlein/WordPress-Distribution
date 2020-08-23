@@ -5,8 +5,9 @@ services:
     environment:
       - WP_DDEV_LOCALE=de_DE
       - WP_DDEV_VERSION=latest
-      - WP_DDEV_TITLE=WordPress-Distribution
+      - WP_DDEV_TITLE=WordPress on DDEV
       - WP_DDEV_ADMIN_USER=admin-ddev
       - WP_DDEV_ADMIN_EMAIL=admin-ddev@ddev.site
-      - WP_DDEV_PLUGINS=antispam-bee statify rest-api-toolbox wp-rollback block-lab debug-bar query-monitor log-deprecated-notices theme-check developer customizer-export-import
-      - WP_DDEV_CLI_PACKAGES=trepmal/wp-revisions-cli
+      - WP_DDEV_ADMIN_PASSWORD=passw0rd
+      - WP_DDEV_PLUGINS=twentig rest-api-toolbox wp-rollback debug-bar query-monitor log-deprecated-notices theme-check developer customizer-export-import log-viewer gutenberg health-check display-environment-type
+      - WP_DDEV_CLI_PACKAGES=mikedance/wp-cli-favorite-plugins
