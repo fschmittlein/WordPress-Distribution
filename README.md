@@ -7,7 +7,7 @@ This repository helps you to get a local new and fresh WordPress for everything 
 
 ## Installation and usage
 1. Download and install [ddev](https://ddev.readthedocs.io/en/stable/#installation)
-1. Clone the repository for a new project `git clone https://github.com/fschmittlein/wp-ddev.git your-project`
+1. Clone the repository for a new project `git clone https://github.com/fschmittlein/WordPress-Distribution.git your-project`
 1. Run `cd your-project`
 1. Run `ddev start`
 1. Run `ddev wordpress` and wait
