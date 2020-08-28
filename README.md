@@ -27,3 +27,5 @@ All adjustments must be made in the `docker-compose.wordpress-env.yaml`
 `ddev wp-block-builder`: A foundation for WordPress Gutenberg blocks plugin development that aims to provide clear and concise guide for building your first block plugin.
 
 `ddev wp-npm`: After wp-block-builder you can use the wp-npm command for the other npm commands.
+
+`ddev wp-env-type`: Get and set the WordPress environment types

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+## Description: Get and set the WordPress environment types
+## Usage: wp-env-type [type]
+## Example: "ddev wp-env-type debug" or "ddev wp-env-type" (https://make.wordpress.org/core/2020/08/27/wordpress-environment-types/)
+## ProjectTypes: wordpress
+
+if [ -f "/var/www/html/wp-config.php" ]; then
+    if (( $# == 1)) then
+        wp config set WP_ENVIRONMENT_TYPE $1
+    else
+        wp config get WP_ENVIRONMENT_TYPE
+    fi
+else
+    echo "WordPress is probably not installed. That's why I'd rather quit now."
+    exit 1
+fi
