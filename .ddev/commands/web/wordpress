@@ -49,8 +49,8 @@ function wp_download_create_install {
         wp config set WP_MAX_MEMORY_LIMIT 512M
         wp config set DISALLOW_FILE_EDIT true --raw
 
-        ## TODO
-        wp config set WP_LOCAL_DEV true --raw
+        ## set the environment type (https://make.wordpress.org/core/2020/08/27/wordpress-environment-types/)
+        wp config set WP_ENVIRONMENT_TYPE local
 
         ## empties a site of its content (posts, comments, terms, and meta)
         wp site empty --uploads --yes
