@@ -6,11 +6,14 @@
 ## ProjectTypes: wordpress
 
 if [ -f "/var/www/html/wp-config.php" ]; then
-    if (( $# == 1)) then
-        wp config set WP_ENVIRONMENT_TYPE $1
-    else
-        wp config get WP_ENVIRONMENT_TYPE
-    fi
+    case $1 in
+        production|staging|development|local)      
+            wp config set WP_ENVIRONMENT_TYPE $1
+            ;;
+        *)
+            echo "The value of WP_ENVIRONMENT_TYPE is: "; wp config get WP_ENVIRONMENT_TYPE
+            ;;
+    esac
 else
     echo "WordPress is probably not installed. That's why I'd rather quit now."
     exit 1
