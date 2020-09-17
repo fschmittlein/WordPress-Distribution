@@ -38,7 +38,7 @@ function wp_download_create_install {
             echo "I guess there was a download error. That's why we're stopping here..."
             exit 1
         fi
-        wp core install --url=https://$DDEV_PRIMARY_URL --title="$WP_DDEV_TITLE" --admin_user="$WP_DDEV_ADMIN_USER" --admin_password="$WP_DDEV_ADMIN_PASSWORD" --admin_email=$WP_DDEV_ADMIN_EMAIL --skip-email
+        wp core install --url=$DDEV_PRIMARY_URL --title="$WP_DDEV_TITLE" --admin_user=$WP_DDEV_ADMIN_USER --admin_password=$WP_DDEV_ADMIN_PASSWORD --admin_email=$WP_DDEV_ADMIN_EMAIL --skip-email
 
         ## get new salts for your wp-config.php file
         wp config shuffle-salts
