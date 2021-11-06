@@ -114,9 +114,11 @@ while :; do
             DO_WP_FLAGS_CLIP=true
              ;;
          -d|--delete)
+            DO_WP_INSTALL=false
             echo "Delete the old WordPress..."
             mysql -e 'DROP DATABASE IF EXISTS db; CREATE DATABASE db;'
             rm -r /var/www/html/*
+			echo "Done with deleting!"
             echo " "
              ;;
          -no|--no-install)
