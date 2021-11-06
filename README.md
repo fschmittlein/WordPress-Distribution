@@ -13,7 +13,7 @@ This repository helps you to get a local new and fresh WordPress for everything 
 1. Run `ddev wordpress` and wait
 
 ## Customisations (before `ddev wordpress`)
-All adjustments must be made in the `docker-compose.wordpress-env.yaml`
+All adjustments must be made in the `config.yaml`
 * Change the language and the version for WordPress
 * Change the title for your WordPress
 * Change the plugins for your WordPress
