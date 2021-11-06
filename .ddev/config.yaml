@@ -1,12 +1,28 @@
 type: wordpress
+docroot: ""
 php_version: "7.4"
 webserver_type: apache-fpm
-timezone: Europe/Berlin
 router_http_port: "80"
 router_https_port: "443"
 xdebug_enabled: false
 additional_hostnames: []
 additional_fqdns: []
-provider: default
+mariadb_version: "10.3"
+mysql_version: ""
+nfs_mount_enabled: false
+mutagen_enabled: false
 use_dns_when_possible: true
+composer_version: ""
+
 disable_settings_management: true
+timezone: Europe/Berlin
+
+web_environment:
+ - WP_DDEV_LOCALE=de_DE
+ - WP_DDEV_VERSION=latest
+ - WP_DDEV_TITLE=WordPress on DDEV
+ - WP_DDEV_ADMIN_USER=admin-ddev
+ - WP_DDEV_ADMIN_EMAIL=admin-ddev@ddev.site
+ - WP_DDEV_ADMIN_PASSWORD=passw0rd
+ - WP_DDEV_PLUGINS=rest-api-toolbox wp-rollback debug-bar query-monitor log-deprecated-notices theme-check developer customizer-export-import log-viewer gutenberg health-check display-environment-type
+ - WP_DDEV_CLI_PACKAGES=mikedance/wp-cli-favorite-plugins
